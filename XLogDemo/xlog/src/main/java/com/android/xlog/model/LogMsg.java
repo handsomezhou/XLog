@@ -12,19 +12,19 @@ import java.io.Serializable;
 
 public class LogMsg extends DataSupport implements Serializable{
     /**
-     * 消息id 建议用时间戳
+     * logId 建议用时间戳
      */
-    private long id;
+    private long logId;
 
     /**
-     * 消息key值 建议用int值
+     * 消息logKey值 建议用int值
      */
-    private String key;
+    private String logKey;
 
     /**
-     * 消息value值 建议用JSONObject,根据不同的key值来区分对应的JSONObject
+     * 消息logValue值 建议用JSONObject,根据不同的key值来区分对应的JSONObject
      */
-    private String value;
+    private String logValue;
 
     /**
      * 添加时间
@@ -35,33 +35,41 @@ public class LogMsg extends DataSupport implements Serializable{
 
     }
 
-    public LogMsg(long id, String key, String value) {
-        this.id = id;
-        this.key = key;
-        this.value = value;
+    public LogMsg(long logId, String logKey, String logValue) {
+        this.logId = logId;
+        this.logKey = logKey;
+        this.logValue = logValue;
     }
 
-    public long getId() {
-        return id;
+    public long getLogId() {
+        return logId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setLogId(long logId) {
+        this.logId = logId;
     }
 
-    public String getKey() {
-        return key;
+    public String getLogValue() {
+        return logValue;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setLogValue(String logValue) {
+        this.logValue = logValue;
     }
 
-    public String getValue() {
-        return value;
+    public String getLogKey() {
+        return logKey;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setLogKey(String logKey) {
+        this.logKey = logKey;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
     }
 }
