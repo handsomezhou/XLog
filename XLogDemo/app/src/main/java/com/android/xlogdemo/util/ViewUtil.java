@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+
 public class ViewUtil {
 	public static void showTextNormal(TextView tv,String text){
 		if((null==tv)||(null==text)){
@@ -165,5 +167,28 @@ public class ViewUtil {
 			}
 		}
 	}*/
-    
+
+	/**
+	 * stop refresh
+	 * @param swipeToLoadLayout
+	 */
+	public static void stopRefresh(SwipeToLoadLayout swipeToLoadLayout){
+		if(null!=swipeToLoadLayout){
+			if(true==swipeToLoadLayout.isRefreshing()){
+				swipeToLoadLayout.setRefreshing(false);
+			}
+		}
+	}
+
+	/**
+	 * stop load more
+	 * @param swipeToLoadLayout
+	 */
+	public static void stopLoadMore(SwipeToLoadLayout swipeToLoadLayout){
+		if(null!=swipeToLoadLayout){
+			if(true==swipeToLoadLayout.isLoadingMore()){
+				swipeToLoadLayout.setLoadingMore(false);
+			}
+		}
+	}
 }

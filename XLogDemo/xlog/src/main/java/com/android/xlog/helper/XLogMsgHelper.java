@@ -15,14 +15,14 @@ import java.util.List;
  */
 
 public class XLogMsgHelper {
-    private static final String TAG="XLogMsgHelper";
+    private static final String TAG = "XLogMsgHelper";
     private List<LogMsg> mLogMsgs;
     /**
      * 日志消息正在处理中
      */
-    private boolean mLogMsgsProcessing =false;
+    private boolean mLogMsgsProcessing = false;
 
-    private XLogMsgHelper(){
+    private XLogMsgHelper() {
         initLogMsgHelper();
         return;
     }
@@ -35,15 +35,15 @@ public class XLogMsgHelper {
         return SingletonHolder.sInstance;
     }
 
-    private void initLogMsgHelper(){
+    private void initLogMsgHelper() {
         initLogMsgs();
         return;
     }
 
-    private void initLogMsgs(){
-        if(null==mLogMsgs){
-            mLogMsgs=new ArrayList<>();
-        }else {
+    private void initLogMsgs() {
+        if (null == mLogMsgs) {
+            mLogMsgs = new ArrayList<>();
+        } else {
             mLogMsgs.clear();
         }
     }
@@ -65,61 +65,60 @@ public class XLogMsgHelper {
     }
 
     /**
-     *
      * @param context
      * @param logMsg
      * @return
      */
-    public boolean add(Context context, LogMsg logMsg){
-        boolean addSuccess=false;
-        do{
-            if(null==context){
+    public boolean add(Context context, LogMsg logMsg) {
+        boolean addSuccess = false;
+        do {
+            if (null == context) {
                 break;
             }
 
-            if(null==logMsg){
+            if (null == logMsg) {
                 break;
             }
 
-            addSuccess=XLogMsgHelper.getInstance().add(logMsg);
-            if(true==addSuccess){
-                XLogMsgService.startServiceToCheckLogMsg(context,logMsg);
+            addSuccess = XLogMsgHelper.getInstance().add(logMsg);
+            if (true == addSuccess) {
+                XLogMsgService.startServiceToCheckLogMsg(context, logMsg);
             }
-        }while (false);
+        } while (false);
         return addSuccess;
     }
 
     /**
      * 处理日志消息
+     *
      * @return
      */
-    public boolean processLogMsgs(){
-        boolean allTaskMessageProcessed=true;
-        do{
-            if(XLogMsgHelper.getInstance().getLogMsgs().size()<=0){
+    public boolean processLogMsgs() {
+        boolean allTaskMessageProcessed = true;
+        do {
+            if (XLogMsgHelper.getInstance().getLogMsgs().size() <= 0) {
                 XLogMsgHelper.getInstance().setLogMsgsProcessing(false);
                 break;
             }
 
-            if(true==XLogMsgHelper.getInstance().isLogMsgsProcessing()){
+            if (true == XLogMsgHelper.getInstance().isLogMsgsProcessing()) {
                 break;
             }
 
             XLogMsgHelper.getInstance().setLogMsgsProcessing(true);
 
-            synchronized (XLogMsgHelper.getInstance().getLogMsgs()){
-                LogUtil.i(TAG,"start:getLogMsgs().size()= ["+XLogMsgHelper.getInstance().getLogMsgs().size()+"]");
+            synchronized (XLogMsgHelper.getInstance().getLogMsgs()) {
+                LogUtil.i(TAG, "start:getLogMsgs().size()= [" + XLogMsgHelper.getInstance().getLogMsgs().size() + "]");
                 //save all log msgs
                 XLogUtil.save(XLogMsgHelper.getInstance().getLogMsgs());
 
                 //clear all log msgs
                 XLogMsgHelper.getInstance().getLogMsgs().clear();
-                LogUtil.i(TAG,"end:getLogMsgs().size()= ["+XLogMsgHelper.getInstance().getLogMsgs().size()+"]");
+                LogUtil.i(TAG, "end:getLogMsgs().size()= [" + XLogMsgHelper.getInstance().getLogMsgs().size() + "]");
             }
 
 
-
-        }while (false);
+        } while (false);
 
         XLogMsgHelper.getInstance().setLogMsgsProcessing(false);
 
@@ -127,17 +126,45 @@ public class XLogMsgHelper {
     }
 
     /**
+     * @param startTimeMs 开始时间
+     * @param dataCount   数据条数
+     * @return
+     */
+    public static List<LogMsg> load(long startTimeMs, int dataCount) {
+        return XLogUtil.load(startTimeMs, dataCount);
+    }
+
+    /**
+     * 删除日志
      *
+     * @param startTimeMs 开始时间
+     * @param endTimeMs   结束时间
+     * @return
+     */
+    public static int deleteLogMsg(long startTimeMs, long endTimeMs) {
+        return XLogUtil.deleteLogMsg(startTimeMs,endTimeMs);
+    }
+
+    /**
+     * 删除所有日志消息
+     *
+     * @return
+     */
+    public static int deleteAllLogMsg() {
+        return XLogUtil.deleteAllLogMsg();
+    }
+
+    /**
      * @param logMsg
      * @return
      */
-    private boolean add(LogMsg logMsg){
-        boolean addSuccess=false;
-        do{
-            if(null!=mLogMsgs){
-                addSuccess=mLogMsgs.add(logMsg);
+    private boolean add(LogMsg logMsg) {
+        boolean addSuccess = false;
+        do {
+            if (null != mLogMsgs) {
+                addSuccess = mLogMsgs.add(logMsg);
             }
-        }while (false);
+        } while (false);
 
         return addSuccess;
     }

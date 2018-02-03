@@ -11,6 +11,10 @@ import java.io.Serializable;
  */
 
 public class LogMsg extends DataSupport implements Serializable{
+    public static final String KEY_LOG_ID="logId";
+    public static final String KEY_LOG_KEY="logKey";
+    public static final String KEY_LOG_VALUE="logValue";
+    public static final String KEY_ADD_TIME="addTime";
     /**
      * logId 建议用时间戳
      */

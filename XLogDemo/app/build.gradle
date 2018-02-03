@@ -25,6 +25,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile project(':xlog')
+
+    /**
+     * https://github.com/Aspsine/SwipeToLoadLayout
+     */
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
 }

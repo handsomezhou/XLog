@@ -2,4 +2,56 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="margin">4dp</dimen>
+    <dimen name="margin_left">4dp</dimen>
+    <dimen name="margin_right">4dp</dimen>
+    <dimen name="margin_top">4dp</dimen>
+    <dimen name="margin_bottom">4dp</dimen>
+    <dimen name="margin2x">8dp</dimen>
+    <dimen name="margin_left2x">8dp</dimen>
+    <dimen name="margin_right2x">8dp</dimen>
+    <dimen name="margin_top2x">8dp</dimen>
+    <dimen name="margin_bottom2x">8dp</dimen>
+    <dimen name="margin4x">16dp</dimen>
+    <dimen name="margin_left4x">16dp</dimen>
+    <dimen name="margin_right4x">16dp</dimen>
+    <dimen name="margin_top4x">16dp</dimen>
+    <dimen name="margin_bottom4x">16dp</dimen>
+
+    <dimen name="margin8x">32dp</dimen>
+    <dimen name="margin_left8x">32dp</dimen>
+    <dimen name="margin_right8x">32dp</dimen>
+    <dimen name="margin_top8x">32dp</dimen>
+    <dimen name="margin_bottom8x">32dp</dimen>
+    <dimen name="padding">4dp</dimen>
+    <dimen name="padding_left">4dp</dimen>
+    <dimen name="padding_right">4dp</dimen>
+    <dimen name="padding_top">4dp</dimen>
+    <dimen name="padding_bottom">4dp</dimen>
+    <dimen name="padding2x">8dp</dimen>
+    <dimen name="padding4x">16dp</dimen>
+    <dimen name="padding_left2x">8dp</dimen>
+    <dimen name="padding_right2x">8dp</dimen>
+    <dimen name="padding_top2x">8dp</dimen>
+    <dimen name="padding_bottom2x">8dp</dimen>
+
+    <dimen name="prompt_large2_text_size">24sp</dimen>
+    <dimen name="prompt_large1_text_size">22sp</dimen>
+    <dimen name="prompt_large_text_size">20sp</dimen>
+    <dimen name="prompt_normal_text_size">18sp</dimen>
+    <dimen name="prompt_small_text_size">16sp</dimen>
+    <dimen name="prompt_small2_text_size">14sp</dimen>
+    <dimen name="prompt_small3_text_size">12sp</dimen>
+    <dimen name="prompt_tiny_text_size">10sp</dimen>
+    <dimen name="prompt_minima_text_size">8sp</dimen>
+
+    <dimen name="corner_radius">3dp</dimen>
+
+    <dimen name="refresh_header_height">80dp</dimen>
+    <dimen name="load_more_footer_height">60dp</dimen>
+
+    <dimen name="list_item_height">54dp</dimen>
+
+
 </resources>

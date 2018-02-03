@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">XLogDemo</string>
+    <string name="add_log_msg">添加日志</string>
+    <string name="add_log_msg_success">添加日志成功</string>
+    <string name="view_log_msg">查看日志</string>
+    <string name="clear_log_msg">清除日志</string>
+    <string name="clear_log_msg_success">清除日志成功</string>
+    <string name="no_log_msgs">无日志数据</string>
+    <string name="no_more_log_msgs">没有更多日志数据</string>
+
+    <!-- start: SwipeToLoadLayout -->
+    <string name="swipe_to_refresh">下拉可以刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_complete">刷新完成</string>
+
+    <string name="swipe_to_load_more">上拉可以加载更多</string>
+    <string name="release_to_load_more">释放立即加载</string>
+    <string name="loading_more">正在加载更多...</string>
+    <string name="load_more_complete">加载完成</string>
+    <!-- end: SwipeToLoadLayout -->
 </resources>

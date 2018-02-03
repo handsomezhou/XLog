@@ -520,9 +520,16 @@ public class TimeUtil {
      * @return
      */
     public static String getLogTime(){
-        return  Constant.NULL_STRING+Constant.LEFT_SQUARE_BRACKETS+TimeUtil.getFormatTime(System.currentTimeMillis(), TimePatternConstant.LOG_TIME_PATTERN)+ Constant.RIGHT_SQUARE_BRACKETS;
+        return  TimeUtil.getFormatTime(System.currentTimeMillis(), TimePatternConstant.LOG_TIME_PATTERN);
     }
 
+    /**
+     * get log time
+     * @return
+     */
+    public static String getLogTime2(){
+        return  Constant.NULL_STRING+Constant.LEFT_SQUARE_BRACKETS+TimeUtil.getFormatTime(System.currentTimeMillis(), TimePatternConstant.LOG_TIME_PATTERN)+ Constant.RIGHT_SQUARE_BRACKETS;
+    }
     /**
      *
      * @param srcMs

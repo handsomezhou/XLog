@@ -7,5 +7,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="text_view_style">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/grey21_transparent</item>
+        <item name="android:textColorHint">@color/dim_grey</item>
+    </style>
 
+    <style name="btn_style">
+        <item name="android:background">@drawable/btn_blue_selector</item>
+        <item name="android:textSize">@dimen/prompt_large_text_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/padding2x</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
