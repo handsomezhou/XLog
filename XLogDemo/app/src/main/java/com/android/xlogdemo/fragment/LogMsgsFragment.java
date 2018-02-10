@@ -17,6 +17,7 @@ import com.android.xlogdemo.R;
 import com.android.xlogdemo.adapter.LogMsgAdapter;
 import com.android.xlogdemo.constant.LoadingMode;
 import com.android.xlogdemo.constant.LogMsgsLoadSorting;
+import com.android.xlogdemo.dialog.CommonDialog;
 import com.android.xlogdemo.model.LogMsgsParameter;
 import com.android.xlogdemo.util.ToastUtil;
 import com.android.xlogdemo.util.ViewUtil;
@@ -32,7 +33,7 @@ import java.util.List;
  * Created by handsomezhou on 2018/1/31.
  */
 
-public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
+public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener,LogMsgAdapter.OnLogMsgAdapter,CommonDialog.OnCommonDialog{
     private static final String TAG = "LogMsgsFragment";
     public static final String EXTRA_LOG_MSGS_PARAMETER = "LogMsgsFragment.EXTRA_LOG_MSGS_PARAMETER";
 
@@ -42,6 +43,11 @@ public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, 
     private List<LogMsg> mLogMsgs;
     private boolean mLoading = false;
     private LogMsgsParameter mLogMsgsParameter;
+    private CommonDialog mCommonDialog;
+
+    private enum DialogType {
+        DELETE_LOG_MSG,
+    }
 
     public static LogMsgsFragment newInstance( LogMsgsParameter logMsgsParameter) {
         Bundle bundle = new Bundle();
@@ -92,6 +98,7 @@ public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, 
         //mLogMsgRv.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.VERTICAL));
         mLogMsgRv.addItemDecoration(new RecycleViewDivider(getContext(), LinearLayoutManager.HORIZONTAL, getContext().getResources().getInteger(R.integer.horizontal_divider_height), getContext().getResources().getColor(R.color.color_horizontal_divider)));
         mLogMsgAdapter = new LogMsgAdapter(getContext(), R.layout.list_item_log_msg, mLogMsgs);
+        mLogMsgAdapter.setOnLogMsgAdapter(this);
 
         mLogMsgRv.setAdapter(mLogMsgAdapter);
         return view;
@@ -147,6 +154,44 @@ public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, 
     }
     /*start: OnLoadMoreListener*/
 
+    /*start: LogMsgAdapter.OnLogMsgAdapter*/
+    @Override
+    public void onClickItem(LogMsg logMsg) {
+
+    }
+
+    @Override
+    public void onLongClickItem(LogMsg logMsg) {
+        getCommonDialog(DialogType.DELETE_LOG_MSG, logMsg).show();
+    }
+    /*end: LogMsgAdapter.OnLogMsgAdapter*/
+
+    /*start: CommonDialog.OnCommonDialog*/
+    @Override
+    public void onCommonDialogOk(Object dialogType, Object dialogData) {
+        switch ((DialogType) dialogType) {
+            case DELETE_LOG_MSG:
+                if(dialogData instanceof LogMsg) {
+                    delete((LogMsg)dialogData);
+                    refreshView();
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
+
+    @Override
+    public void onCommonDialogCancel(Object dialogType, Object dialogData) {
+
+    }
+    /*end: CommonDialog.OnCommonDialog*/
+
+
+
     public boolean isLoading() {
         return mLoading;
     }
@@ -155,6 +200,37 @@ public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, 
         mLoading = loading;
     }
 
+    public CommonDialog getCommonDialog(DialogType dialogType, Object object) {
+        if (null == dialogType || null == object) {
+            return null;
+        }
+
+        if (null == mCommonDialog) {
+            mCommonDialog = new CommonDialog(getContext());
+            mCommonDialog.setCancelable(true);
+            mCommonDialog.setCanceledOnTouchOutside(true);
+            mCommonDialog.setOnCommonDialog(this);
+        }
+
+        mCommonDialog.setDialogType(dialogType);
+        switch (dialogType) {
+            case DELETE_LOG_MSG:
+                mCommonDialog.setDialogData(object);
+                mCommonDialog.getTitleTv().setText(R.string.delete_log_msg);
+
+                mCommonDialog.getMessageTv().setText(
+                        R.string.sure_delete_log_msg);
+                break;
+            default:
+                break;
+        }
+
+        return mCommonDialog;
+    }
+
+    public void setCommonDialog(CommonDialog commonDialog) {
+        mCommonDialog = commonDialog;
+    }
 
     private void initLogMsgs() {
         if (null == mLogMsgs) {
@@ -272,5 +348,64 @@ public class LogMsgsFragment extends BaseFragment implements OnRefreshListener, 
             }
 
         }
+    }
+
+    private void delete(LogMsg logMsg){
+        do{
+            if(null==logMsg){
+                break;
+            }
+            int rowsAffected=XLogMsgHelper.deleteLogMsg(logMsg.getLogId());
+            if(rowsAffected>0){
+                removeFromLogMsgList(logMsg);
+                ToastUtil.toastLengthshort(getContext(),R.string.delete_log_msg_success);
+            }
+        }while (false);
+
+        return;
+    }
+
+    private void removeFromLogMsgList(LogMsg logMsg){
+        do{
+            if(null==logMsg){
+                break;
+            }
+
+            if(null==mLogMsgs||mLogMsgs.size()<=0){
+                break;
+            }
+
+            int logMsgsSize=mLogMsgs.size();
+            for(int i=0; i<logMsgsSize; i++){
+                if(mLogMsgs.get(i).getLogId()==logMsg.getLogId()){
+                    mLogMsgs.remove(i);
+                    break;
+                }
+            }
+        }while (false);
+
+        return;
+    }
+
+    private void refreshView(){
+        refreshLogMsgRv();
+    }
+
+    private void refreshLogMsgRv(){
+        if (null == mLogMsgRv) {
+            return;
+        }
+
+        if (null != mLogMsgAdapter) {
+            mLogMsgAdapter.notifyDataSetChanged();
+
+            if (mLogMsgAdapter.getItemCount() > 0) {
+                ViewUtil.showView(mLogMsgRv);
+            } else {
+                ViewUtil.hideView(mLogMsgRv);
+            }
+        }
+
+        return;
     }
 }

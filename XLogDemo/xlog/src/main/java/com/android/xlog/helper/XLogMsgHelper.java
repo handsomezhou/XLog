@@ -146,6 +146,16 @@ public class XLogMsgHelper {
 
     /**
      * 删除日志
+     * @param logId
+     * @return
+     */
+    public static int deleteLogMsg(long logId) {
+        return XLogUtil.deleteLogMsg(logId);
+    }
+
+
+    /**
+     * 删除日志
      *
      * @param startTimeMs 开始时间
      * @param endTimeMs   结束时间

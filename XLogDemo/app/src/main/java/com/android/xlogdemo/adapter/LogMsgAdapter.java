@@ -21,6 +21,12 @@ public class LogMsgAdapter extends RecyclerView.Adapter<LogMsgAdapter.LogMsgView
     private Context mContext;
     private int mLayoutResId;
     private List<LogMsg> mLogMsgs;
+    private OnLogMsgAdapter mOnLogMsgAdapter;
+
+    public interface OnLogMsgAdapter {
+        void onClickItem(LogMsg logMsg);
+        void onLongClickItem(LogMsg logMsg);
+    }
 
     public LogMsgAdapter(Context context, int layoutResId, List<LogMsg> logMsgs) {
         mContext = context;
@@ -70,9 +76,35 @@ public class LogMsgAdapter extends RecyclerView.Adapter<LogMsgAdapter.LogMsgView
             mAddTimeTv = (TextView) view.findViewById(R.id.add_time_text_view);
             mValueTv = (TextView) view.findViewById(R.id.value_text_view);
 
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    LogMsg logMsg = mLogMsgs.get(getAdapterPosition());
+                    if (null != mOnLogMsgAdapter) {
+                        mOnLogMsgAdapter.onClickItem(logMsg);
+                    }
+                }
+            });
 
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    LogMsg logMsg = mLogMsgs.get(getAdapterPosition());
+                    if (null != mOnLogMsgAdapter) {
+                        mOnLogMsgAdapter.onLongClickItem(logMsg);
+                    }
+                    return true;
+                }
+            });
         }
 
     }
 
+    public OnLogMsgAdapter getOnLogMsgAdapter() {
+        return mOnLogMsgAdapter;
+    }
+
+    public void setOnLogMsgAdapter(OnLogMsgAdapter onLogMsgAdapter) {
+        mOnLogMsgAdapter = onLogMsgAdapter;
+    }
 }

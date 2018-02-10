@@ -4,6 +4,9 @@
     <string name="add_log_msg_success">添加日志成功</string>
     <string name="view_log_msg_by_des">查看日志(降序)</string>
     <string name="view_log_msg_by_asc">查看日志(升序)</string>
+    <string name="delete_log_msg">删除日志</string>
+    <string name="sure_delete_log_msg">确定删除该日志?</string>
+    <string name="delete_log_msg_success">删除日志成功</string>
     <string name="clear_log_msg">清除日志</string>
     <string name="clear_log_msg_success">清除日志成功</string>
     <string name="no_log_msgs">无日志数据</string>
@@ -20,4 +23,9 @@
     <string name="loading_more">正在加载更多...</string>
     <string name="load_more_complete">加载完成</string>
     <!-- end: SwipeToLoadLayout -->
+
+    <!-- Start: common dialog -->
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
+    <!-- End: common dialog -->
 </resources>

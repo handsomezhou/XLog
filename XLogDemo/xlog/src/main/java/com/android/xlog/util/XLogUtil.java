@@ -18,7 +18,9 @@ public class XLogUtil {
     private static int DEFAULT_LOAD_DATA_COUNT =10;
     private static String FIND_LOG_MSG_BY_START_TIME_MS_AND_DATA_COUNT_FROM_LOG_MSG = LogMsg.KEY_LOG_ID+" >= ? "+" limit ? ";
     private static String FIND_LOG_MSG_BY_END_TIME_MS_AND_DATA_COUNT_FROM_LOG_MSG = LogMsg.KEY_LOG_ID+" <= ? order by logId desc "+" limit ? ";
+    private static String DELETE_LOG_MSG_BY_LOG_ID = LogMsg.KEY_LOG_ID+" = ? ";
     private static String DELETE_LOG_MSG_BY_START_TIME_MS_AND_END_TIME_MS_FROM_LOG_MSG = LogMsg.KEY_LOG_ID+" >= ? and "+LogMsg.KEY_LOG_ID+" <= ? ";
+
 
     /**
      *
@@ -95,6 +97,15 @@ public class XLogUtil {
     public static List<LogMsg> loadToEndTime(long endTimeMs){
 
         return load(DEFAULT_LOAD_DATA_COUNT,endTimeMs);
+    }
+
+    /**
+     * 删除日志
+     * @param logId
+     * @return
+     */
+    public static int deleteLogMsg( long logId){
+        return DataSupport.deleteAll(LogMsg.class,DELETE_LOG_MSG_BY_LOG_ID,String.valueOf(logId));
     }
 
     /**
