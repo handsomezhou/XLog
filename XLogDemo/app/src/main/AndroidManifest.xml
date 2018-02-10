@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.android.xlogdemo">
 
-    <!-- https://stackoverflow.com/questions/27095077/how-do-i-use-toolsoverridelibrary-in-a-build-gradle-file -->
-    <!--<uses-sdk tools:overrideLibrary="org.litepal"/>-->
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application

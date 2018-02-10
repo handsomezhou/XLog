@@ -2,7 +2,8 @@
     <string name="app_name">XLogDemo</string>
     <string name="add_log_msg">添加日志</string>
     <string name="add_log_msg_success">添加日志成功</string>
-    <string name="view_log_msg">查看日志</string>
+    <string name="view_log_msg_by_des">查看日志(降序)</string>
+    <string name="view_log_msg_by_asc">查看日志(升序)</string>
     <string name="clear_log_msg">清除日志</string>
     <string name="clear_log_msg_success">清除日志成功</string>
     <string name="no_log_msgs">无日志数据</string>

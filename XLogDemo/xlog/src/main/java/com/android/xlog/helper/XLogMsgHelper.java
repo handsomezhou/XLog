@@ -135,6 +135,16 @@ public class XLogMsgHelper {
     }
 
     /**
+     *
+     * @param dataCount 数据条数
+     * @param endTimeMs 结束时间
+     * @return
+     */
+    public static List<LogMsg> load( int dataCount,long endTimeMs) {
+        return XLogUtil.load(dataCount,endTimeMs);
+    }
+
+    /**
      * 删除日志
      *
      * @param startTimeMs 开始时间

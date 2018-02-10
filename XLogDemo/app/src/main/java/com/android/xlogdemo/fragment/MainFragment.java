@@ -12,6 +12,8 @@ import com.android.xlog.util.TimeUtil;
 import com.android.xlog.util.XLogUtil;
 import com.android.xlogdemo.R;
 import com.android.xlogdemo.activity.LogMsgsActivity;
+import com.android.xlogdemo.constant.LogMsgsLoadSorting;
+import com.android.xlogdemo.model.LogMsgsParameter;
 import com.android.xlogdemo.util.ToastUtil;
 
 /**
@@ -20,7 +22,8 @@ import com.android.xlogdemo.util.ToastUtil;
 
 public class MainFragment extends BaseFragment {
     private Button mAddLogMsgBtn;
-    private Button mViewLogMsgBtn;
+    private Button mViewLogMsgByDesBtn;
+    private Button mViewLogMsgByAscBtn;
     private Button mClearLogMsgBtn;
 
     @Override
@@ -32,7 +35,8 @@ public class MainFragment extends BaseFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mAddLogMsgBtn = (Button) view.findViewById(R.id.add_log_msg_btn);
-        mViewLogMsgBtn = (Button) view.findViewById(R.id.view_log_msg_btn);
+        mViewLogMsgByDesBtn = (Button) view.findViewById(R.id.view_log_msg_by_des_btn);
+        mViewLogMsgByAscBtn = (Button) view.findViewById(R.id.view_log_msg_by_asc_btn);
         mClearLogMsgBtn = (Button) view.findViewById(R.id.clear_log_msg_btn);
         return view;
     }
@@ -46,13 +50,19 @@ public class MainFragment extends BaseFragment {
             }
         });
 
-        mViewLogMsgBtn.setOnClickListener(new View.OnClickListener() {
+        mViewLogMsgByDesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewLogMsg();
+                viewLogMsgByDes();
             }
         });
 
+        mViewLogMsgByAscBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewLogMsgByAsc();
+            }
+        });
         mClearLogMsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,9 +80,19 @@ public class MainFragment extends BaseFragment {
         ToastUtil.toastLengthLong(getContext(), R.string.add_log_msg_success);
     }
 
-    private void viewLogMsg() {
-        LogMsgsActivity.launch(getContext());
+    private void viewLogMsgByDes() {
+        LogMsgsParameter logMsgsParameter=new LogMsgsParameter();
+        logMsgsParameter.setLogMsgsLoadSorting(LogMsgsLoadSorting.DES);
+        LogMsgsActivity.launch(getActivity(),logMsgsParameter);
     }
+
+    private void viewLogMsgByAsc() {
+        LogMsgsParameter logMsgsParameter=new LogMsgsParameter();
+        logMsgsParameter.setLoadDataCountPerTime(logMsgsParameter.getLoadDataCountPerTime()*2);
+        logMsgsParameter.setLogMsgsLoadSorting(LogMsgsLoadSorting.ASC);
+        LogMsgsActivity.launch(getActivity(),logMsgsParameter);
+    }
+
 
     private void clearLogMsg(){
         XLogMsgHelper.deleteAllLogMsg();
